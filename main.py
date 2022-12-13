@@ -7,11 +7,11 @@ import json
 from helicopter import Helicopter as Hel
 
 
-TICK_SLEEP = 0.05
-TREE_UPDATE = 50
-CLOUDS_UPDATE = 100
-FIRE_UPDATE = 75
-MAP_W, MAP_H = 20, 10
+TICK_SLEEP = 0.05       #частота обновления поля
+TREE_UPDATE = 50        #частота обновления деревьев
+CLOUDS_UPDATE = 100     #частота обновления облаков
+FIRE_UPDATE = 75        #частота обновления огня
+MAP_W, MAP_H = 20, 10   #размер карты
 
 
 field = Map(MAP_W,MAP_H)
@@ -20,11 +20,11 @@ hel = Hel(MAP_W,MAP_H)
 tick = 1 
 
 
-MOVES = {'w':(-1, 0), 'd':(0,1), 's':(1,0), 'a':(0, -1) }
+MOVES = {'w':(-1, 0), 'd':(0,1), 's':(1,0), 'a':(0, -1) } #привязка клавиши к "координатам" 
 
-def process_key(key):
+def process_key(key):  
     global hel, tick, clouds, field
-    c = key.char.lower()
+    c = key.char.lower() 
 
     #helicopter moves
     if c in MOVES.keys():
@@ -47,6 +47,7 @@ def process_key(key):
             field.import_data(data['field'])
             clouds.import_data(data['clouds'])
 
+# реализация передвижения после отжатия клавиши
 listener = keyboard.Listener(
     on_press=None,
     on_release=process_key)
